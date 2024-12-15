@@ -35,20 +35,12 @@ app.use((req, res, next) => {
 });
 
 // CORS middleware
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app'); // Разрешить все источники
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    
-    // Handle preflight requests
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
-    
-    next();
-});
-
+app.use(cors({
+    origin: 'https://frontend-iota-orpin.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
 app.use(express.json());
 
 // MongoDB Connection
