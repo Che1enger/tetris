@@ -4,7 +4,7 @@ import { useAuth } from "./AuthContext";
 import { useTranslation } from "react-i18next";
 import Leaderboard from "./components/Leaderboard";
 import PersonIcon from "@mui/icons-material/Person";
-import "./Menu.css";
+import "./menu.css";
 
 const Menu = () => {
     const navigate = useNavigate();
