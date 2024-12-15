@@ -24,8 +24,6 @@ const io = new Server(server, {
 });
 
 
-// CORS middleware
-const cors = require('cors');
 
 // Разрешить доступ только для определенного фронтенда
 app.use(cors());
