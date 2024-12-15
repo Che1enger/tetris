@@ -15,7 +15,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: ['https://frontend-iota-orpin.vercel.app', 'https://backend2-hazel.vercel.app'], 
+        origin: ['https://frontend-iota-orpin.vercel.app'], 
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true
@@ -24,12 +24,12 @@ const io = new Server(server, {
 
 // CORS middleware
 app.use(cors({
-    origin: ['https://frontend-iota-orpin.vercel.app'],
+    origin: 'https://frontend-iota-orpin.vercel.app', // Allow only this origin
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    credentials: true // Allow credentials if needed
 }));
-
+app.options('*', cors()); // Enable preflight for all routes
 app.use(express.json());
 
 // MongoDB Connection
