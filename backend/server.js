@@ -102,6 +102,8 @@ app.post('/api/register', async (req, res) => {
 
 // Вход
 app.post('/api/login', async (req, res) => {
+    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app');
+    res.header('Access-Control-Allow-Credentials', 'true');
     try {
         const { username, password } = req.body;
         console.log('Login attempt:', { username });
