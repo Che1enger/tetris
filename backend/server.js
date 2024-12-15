@@ -35,15 +35,15 @@ app.use((req, res, next) => {
 });
 
 // CORS middleware
+const cors = require('cors');
+
+// Разрешить доступ только для определенного фронтенда
 app.use(cors({
-    origin: [
-        'https://frontend-iota-orpin.vercel.app', 
-        'https://backend2-hazel.vercel.app'
-    ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+  origin: ['https://frontend-iota-orpin.vercel.app', 'https://backend2-hazel.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true, // Если нужно передавать куки или авторизацию
 }));
+
 app.use(express.json());
 
 // MongoDB Connection
