@@ -18,11 +18,13 @@ app.use(express.json());  // Парсинг JSON в теле запросов
 
 // Подключение к MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    socketTimeoutMS: 45000,
+    connectTimeoutMS: 45000
 })
 .then(() => console.log('MongoDB connected'))
 .catch((err) => console.error('MongoDB connection error:', err));
+
 
 // Роуты
 app.use('/api/login', loginRouter);  // Маршрут для логина
