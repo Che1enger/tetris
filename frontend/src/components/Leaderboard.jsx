@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import "./Leaderboard.css";
 
-const API_URL = "http://localhost:5000";
+const API_URL = "http://backend2-hazel.vercel.app";
 
 const Leaderboard = () => {
     const [activeTab, setActiveTab] = useState("single");

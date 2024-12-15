@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 import { useTranslation } from "react-i18next";
 import emailjs from "emailjs-com";
-import "./Form.css";
+import "./form.css";
 
 const LoginRegistrationPage = () => {
     const [username, setUsername] = useState("");
