@@ -6,16 +6,18 @@ import User from '../models/User.js';
 const app = express();
 app.use(express.json());
 
-app.post('/', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
-
+    
     try {
-        const user = await User.findOne({ username });
+        // Используем индексы для быстрого поиска пользователя по username
+        const user = await User.findOne({ username }).select('password');  // Выбираем только поле password
 
         if (!user) {
             return res.status(400).json({ message: 'User not found' });
         }
 
+        // Сравниваем пароль
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
@@ -37,5 +39,6 @@ app.post('/', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
 
 export default app;
