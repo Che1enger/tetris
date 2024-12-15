@@ -9,7 +9,6 @@ import { Server } from 'socket.io';
 import User from './models/User.js';
 import Game from './models/Game.js';
 
-
 dotenv.config();
 
 const app = express();
@@ -23,10 +22,13 @@ const io = new Server(server, {
     }
 });
 
-
-
-// Разрешить доступ только для определенного фронтенда
-app.use(cors());
+// CORS middleware
+app.use(cors({
+    origin: ['https://frontend-iota-orpin.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
 
 app.use(express.json());
 
@@ -102,8 +104,6 @@ app.post('/api/register', async (req, res) => {
 
 // Вход
 app.post('/api/login', async (req, res) => {
-    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app');
-    res.header('Access-Control-Allow-Credentials', 'true');
     try {
         const { username, password } = req.body;
         console.log('Login attempt:', { username });
@@ -149,7 +149,6 @@ app.post('/api/login', async (req, res) => {
 });
 
 app.get('/test-cors', (req, res) => {
-    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app');
     res.json({ message: 'CORS is working!' });
 });
 
