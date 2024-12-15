@@ -10,7 +10,6 @@ import User from './models/User.js';
 import Game from './models/Game.js';
 
 
-
 dotenv.config();
 
 const app = express();

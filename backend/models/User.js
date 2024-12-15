@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -52,4 +52,4 @@ UserSchema.path('email').validate(function(value) {
     return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value);
 }, 'Invalid email format');
 
-module.exports = mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);
