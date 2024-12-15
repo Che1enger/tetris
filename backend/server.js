@@ -15,7 +15,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: 'https://frontend-iota-orpin.vercel.app', // Allow only this origin
+        origin: '*', // Allow only this origin
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true
@@ -27,6 +27,13 @@ app.use(cors());
 
 app.options('/api/login', cors());// Enable preflight for all routes
 app.use(express.json());
+app.use((req, res, next) => {
+    res.setHeader(
+        'Content-Security-Policy',
+        "default-src 'self'; script-src 'self' https://vercel.live; connect-src 'self' https://vercel.live; img-src 'self'; style-src 'self';"
+    );
+    next();
+});
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {

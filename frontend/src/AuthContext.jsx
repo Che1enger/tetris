@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = 'https://backend2-hazel.vercel.app' ;
+const API_URL =  process.env.NODE_ENV === 'production' ? 'https://backend2-hazel.vercel.app' : 'http://localhost:5000' ;
 
 export const AuthContext = createContext(null);
 
