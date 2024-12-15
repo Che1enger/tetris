@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 const API_URL = window.location.hostname.includes('ngrok')
-    ? 'https://bb60-62-65-196-16.ngrok-free.app' : 'http://localhost:5000';
+    ? 'https://backend2-hazel.vercel.app' : 'http://localhost:5000';
 
 export const AuthContext = createContext(null);
 

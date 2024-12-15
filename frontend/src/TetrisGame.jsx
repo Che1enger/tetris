@@ -323,7 +323,7 @@ const saveScore = useCallback(async (username, score) => {
     localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:5000/api/score/update', {
+        const response = await fetch('http://backend2-hazel.vercel.app/api/score/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -800,7 +800,7 @@ const merge = useCallback((arena, player) => {
             }
             try {
                 const token = localStorage.getItem('token');
-                const response = await fetch('http://localhost:5000/api/games/increment', {
+                const response = await fetch('http://backend2-hazel.vercel.app/api/games/increment', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
