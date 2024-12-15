@@ -23,12 +23,7 @@ const io = new Server(server, {
 });
 
 // CORS middleware
-app.use(cors({
-    origin: 'https://frontend-iota-orpin.vercel.app', // Allow only this origin
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-}));
+app.use(cors());
 
 app.options('/api/login', cors());// Enable preflight for all routes
 app.use(express.json());
@@ -109,7 +104,7 @@ app.post('/api/login', async (req, res) => {
         const { username, password } = req.body;
         console.log('Login attempt:', { username });
 
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ username }).maxTimeMS(20000); // Set a timeout for the query
         if (!user) {
             console.log('User not found:', username);
             return res.status(400).json({ 
