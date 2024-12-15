@@ -16,7 +16,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: 'https://frontend-iota-orpin.vercel.app', // Разрешить все источники
+        origin: ['https://frontend-iota-orpin.vercel.app', 'https://backend2-hazel.vercel.app'], 
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true
@@ -36,7 +36,10 @@ app.use((req, res, next) => {
 
 // CORS middleware
 app.use(cors({
-    origin: 'https://frontend-iota-orpin.vercel.app',
+    origin: [
+        'https://frontend-iota-orpin.vercel.app', 
+        'https://backend2-hazel.vercel.app'
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
