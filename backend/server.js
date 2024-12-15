@@ -25,14 +25,16 @@ const io = new Server(server, {
 
 // Middleware для логирования запросов
 app.use((req, res, next) => {
-    console.log('Request:', {
-        method: req.method,
-        path: req.path,
-        headers: req.headers,
-        body: req.body
-    });
+    res.setHeader('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app'); // Разрешить определенный источник
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); // Разрешенные методы
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Разрешенные заголовки
+    res.setHeader('Access-Control-Allow-Credentials', 'true'); // Если нужно передавать куки
+    if (req.method === 'OPTIONS') {
+      res.status(204).end(); // Ответить на preflight-запрос
+      return;
+    }
     next();
-});
+  });
 
 // CORS middleware
 const cors = require('cors');
