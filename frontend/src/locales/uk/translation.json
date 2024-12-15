@@ -1,0 +1,80 @@
+{
+  "loading": "Завантаження...",
+  "errors": {
+    "error": "Помилка",
+    "noToken": "Токен авторизації не знайдено",
+    "fetchFailed": "Не вдалося отримати дані",
+    "serverError": "Виникла помилка сервера. Будь ласка, спробуйте пізніше."
+  },
+  "profile": {
+    "title": "Профіль гравця",
+    "username": "Нікнейм",
+    "email": "Електронна пошта",
+    "stats": "Статистика",
+    "networkWins": "Мережеві перемоги",
+    "singlePlayerMaxScore": "Максимальний рахунок в одиночній грі",
+    "networkMaxScore": "Максимальний рахунок в мережевій грі",
+    "gamesPlayed": "Зіграно ігор",
+    "blockColor": "Колір блоків",
+    "back": "Назад до меню"
+  },
+  "menu": {
+    "welcome": "Ласкаво просимо",
+    "singlePlayer": "Одиночна гра",
+    "networkGame": "Мережева гра",
+    "logout": "Вийти"
+  },
+  "game": {
+    "score": "Рахунок",
+    "opponent": "Суперник",
+    "next_piece": "Наступний:",
+    "game_over": "Гра закінчена",
+    "new_game": "Нова гра",
+    "return_to_menu": "Повернутися в меню",
+    "waiting": "Очікування суперника",
+    "win": "Ви перемогли!",
+    "lose": "Ви програли!",
+    "searching": "Пошук суперника...",
+    "waitingOpponent": "Очікування завершення гри суперника...",
+    "you": "Ви",
+    "yourScore": "Ваш рахунок",
+    "opponentScore": "Рахунок суперника",
+    "gameOver": "Гра закінчена",
+    "winner": "Переможець",
+    "winnerScore": "Рахунок переможця"
+  },
+  "auth": {
+    "login": "Вхід",
+    "register": "Реєстрація",
+    "username": "Нікнейм",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "confirmPassword": "Підтвердіть пароль",
+    "enterUsername": "Введіть нікнейм",
+    "enterEmail": "Введіть електронну пошту",
+    "enterPassword": "Введіть пароль",
+    "confirmYourPassword": "Підтвердіть ваш пароль",
+    "passwordsDoNotMatch": "Паролі не співпадають",
+    "registrationSuccess": "Вітаємо! Ви успішно зареєстрували користувача {{username}}",
+    "userExists": "Користувач з такою поштою або нікнеймом вже існує",
+    "invalidCredentials": "Невірний нікнейм або пароль",
+    "requiredField": "Це поле обов'язкове",
+    "invalidEmail": "Будь ласка, введіть коректну електронну пошту",
+    "userNotFound": "Користувача не знайдено",
+    "invalidPassword": "Невірний пароль"
+  },
+  "leaderboard": {
+    "title": "Таблиця лідерів",
+    "singlePlayer": "Одиночна гра",
+    "networkGame": "Мережева гра",
+    "player": "Гравець",
+    "bestScore": "Кращий рахунок",
+    "wins": "Перемоги"
+  },
+  "matchHistory": {
+    "title": "Історія матчів",
+    "win": "П",
+    "loss": "П",
+    "noMatches": "Немає зіграних матчів"
+  }
+}

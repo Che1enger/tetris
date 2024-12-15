@@ -1,0 +1,76 @@
+{
+  "game": {
+    "score": "Score",
+    "opponentScore": "Opponent Score",
+    "next_piece": "Next:",
+    "game_over": "Game Over",
+    "new_game": "New Game",
+    "return_to_menu": "Return to Menu",
+    "searching": "Searching for opponent...",
+    "waiting": "Waiting for opponent to finish...",
+    "you": "You",
+    "yourScore": "Your Score",
+    "opponent": "Opponent",
+    "winner": "Winner",
+    "winnerScore": "Winner Score"
+  },
+  "loading": "Loading...",
+  "errors": {
+    "error": "Error",
+    "noToken": "No authentication token found",
+    "fetchFailed": "Failed to fetch data",
+    "serverError": "Server error occurred. Please try again later."
+  },
+  "profile": {
+    "title": "Player Profile",
+    "username": "Username",
+    "email": "Email",
+    "stats": "Statistics",
+    "networkWins": "Network Wins",
+    "singlePlayerMaxScore": "Single Player Max Score",
+    "networkMaxScore": "Network Max Score",
+    "gamesPlayed": "Games Played",
+    "blockColor": "Block Color",
+    "back": "Back to Menu"
+  },
+  "menu": {
+    "welcome": "Welcome",
+    "singlePlayer": "Single Player",
+    "networkGame": "Network Game",
+    "logout": "Logout"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "enterUsername": "Enter username",
+    "enterEmail": "Enter email",
+    "enterPassword": "Enter password",
+    "confirmYourPassword": "Confirm your password",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "registrationSuccess": "Congratulations! You have successfully registered user {{username}}",
+    "userExists": "User with this email or username already exists",
+    "invalidCredentials": "Invalid username or password",
+    "requiredField": "This field is required",
+    "invalidEmail": "Please enter a valid email address",
+    "userNotFound": "User not found",
+    "invalidPassword": "Invalid password"
+  },
+  "leaderboard": {
+    "title": "Leaderboard",
+    "singlePlayer": "Single Player",
+    "networkGame": "Network Game",
+    "player": "Player",
+    "bestScore": "Best Score",
+    "wins": "Wins"
+  },
+  "matchHistory": {
+    "title": "Match History",
+    "win": "W",
+    "loss": "L",
+    "noMatches": "No matches played yet"
+  }
+}

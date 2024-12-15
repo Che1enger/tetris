@@ -1,0 +1,63 @@
+*{
+    
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black
+}
+.game-over-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.game-over-modal .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 300px;
+
+    width: 100%;
+}
+.modal-content h2,p {
+    background-color: white;
+    color: black;
+}
+
+.game-over-modal .modal-buttons {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.game-over-modal .modal-buttons button {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.game-over-modal .modal-buttons button:first-child {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.game-over-modal .modal-buttons button:last-child {
+    background-color: #f44336;
+    color: white;
+}
