@@ -1,9 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
-
-const API_URL = window.location.hostname.includes('ngrok')
-    ? 'https://backend2-hazel.vercel.app' : 'http://localhost:5000';
+const API_URL = 'http://backend2-hazel.vercel.app' ;
 
 export const AuthContext = createContext(null);
 
