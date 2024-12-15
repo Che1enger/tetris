@@ -103,7 +103,7 @@ app.post('/api/login', async (req, res) => {
         const { username, password } = req.body;
         console.log('Login attempt:', { username });
 
-        const user = await User.findOne({ username }).maxTimeMS(20000); // Set a timeout for the query
+        const user = await User.findOne({ username }).maxTimeMS(50000); // Set a timeout for the query
         if (!user) {
             console.log('User not found:', username);
             return res.status(400).json({ 
