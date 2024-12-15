@@ -39,10 +39,11 @@ const cors = require('cors');
 
 // Разрешить доступ только для определенного фронтенда
 app.use(cors({
-  origin: ['https://frontend-iota-orpin.vercel.app', 'https://backend2-hazel.vercel.app'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true, // Если нужно передавать куки или авторизацию
-}));
+    origin: 'https://frontend-iota-orpin.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Разрешенные методы
+    allowedHeaders: ['Content-Type', 'Authorization'],    // Разрешенные заголовки
+    credentials: true,                                    // Если требуется передача куки
+  }));
 
 app.use(express.json());
 
