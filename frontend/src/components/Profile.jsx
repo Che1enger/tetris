@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import './Profile.css';
 import MatchHistory from './MatchHistory';
 
-const API_URL = 'http://backend2-hazel.vercel.app';
+const API_URL = 'https://backend2-hazel.vercel.app';
 
 const Profile = ({ onColorChange }) => {
     const { t, i18n } = useTranslation();

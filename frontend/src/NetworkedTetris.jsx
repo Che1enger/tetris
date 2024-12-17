@@ -6,8 +6,8 @@ import "./network.css";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const API_URL = "http://backend2-hazel.vercel.app";
-const SOCKET_URL = "http://backend2-hazel.vercel.app";
+const API_URL = "https://backend2-hazel.vercel.app";
+const SOCKET_URL = "https://backend2-hazel.vercel.app";
 
 const NetworkedTetris = () => {
     const { t } = useTranslation();

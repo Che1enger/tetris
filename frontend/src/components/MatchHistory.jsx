@@ -3,7 +3,7 @@ import { useAuth } from "../AuthContext";
 import { useTranslation } from "react-i18next";
 import "./MatchHistory.css";
 
-const API_URL = "http://backend2-hazel.vercel.app";
+const API_URL = "https://backend2-hazel.vercel.app";
 
 const MatchHistory = () => {
     const { user } = useAuth();
