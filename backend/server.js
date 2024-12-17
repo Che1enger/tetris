@@ -64,44 +64,62 @@ const authenticateToken = async (req, res, next) => {
 
 // Регистрация
 app.post('/api/register', async (req, res) => {
+    // Добавляем CORS-заголовки вручную
+    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app'); // Указываем разрешённый домен
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true'); // Для работы с куки или авторизацией
+
     try {
         const { username, email, password } = req.body;
+        console.log('Registration attempt:', { username, email });
 
-        let user = await User.findOne({ $or: [{ email }, { username }] });
-
-        if (user) {
-            return res.status(400).json({ 
-                message: 'USER_EXISTS',
-                code: 'auth.userExists'
+        // Проверка, существует ли пользователь с таким же именем или email
+        const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+        if (existingUser) {
+            console.log('User already exists:', { username, email });
+            return res.status(400).json({
+                message: 'USER_ALREADY_EXISTS',
+                code: 'auth.userAlreadyExists'
             });
         }
 
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+        // Хэширование пароля
+        const hashedPassword = await bcrypt.hash(password, 10);
+        console.log('Password hashed for user:', username);
 
-        user = new User({
+        // Создание нового пользователя
+        const newUser = new User({
             username,
             email,
             password: hashedPassword
         });
 
-        await user.save();
+        await newUser.save();
+        console.log('User registered successfully:', username);
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        // Генерация JWT-токена для нового пользователя
+        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        console.log('Token generated for new user:', username);
 
+        // Возвращаем успешный ответ с токеном и данными пользователя
         res.status(201).json({
             token,
             user: {
-                id: user._id,
-                username: user.username,
-                email: user.email
+                id: newUser._id,
+                username: newUser.username,
+                email: newUser.email
             }
         });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Ошибка сервера' });
+        console.error('Registration error:', error);
+        res.status(500).json({
+            message: 'SERVER_ERROR',
+            code: 'errors.serverError'
+        });
     }
 });
+
 
 // Вход
 app.post('/api/login', async (req, res) => {
