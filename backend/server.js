@@ -16,7 +16,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: 'https://frontend-iota-orpin.vercel.app', 
+        origin: ['https://frontend-iota-orpin.vercel.app'], 
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true
@@ -26,7 +26,14 @@ const io = new Server(server, {
 
 
 // Разрешить доступ только для определенного фронтенда
-app.use(cors());
+
+app.use(cors({
+    origin: ['https://frontend-iota-orpin.vercel.app'], // Разрешить запросы с вашего фронтенда
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true // Включает передачу куки или заголовков
+}));
+
 
 app.use(express.json());
 
@@ -98,6 +105,11 @@ app.post('/api/register', async (req, res) => {
 
 // Вход
 app.post('/api/login', async (req, res) => {
+    // Добавляем CORS-заголовки вручную
+    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app'); // Указываем разрешённый домен
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true'); // Если фронтенд отправляет куки или авторизацию
 
     try {
         const { username, password } = req.body;
@@ -142,6 +154,7 @@ app.post('/api/login', async (req, res) => {
         });
     }
 });
+
 
 app.get('/test-cors', (req, res) => {
     res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app');
