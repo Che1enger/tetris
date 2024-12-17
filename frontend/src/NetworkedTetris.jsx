@@ -7,10 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const API_URL = "https://backend2-hazel.vercel.app";
-const SOCKET_URL = io('https://backend2-hazel.vercel.app', {
-    withCredentials: true,
-    transports: ['websocket', 'polling'], // Убедитесь, что используется polling и websocket
-});
+const SOCKET_URL = "https://backend2-hazel.vercel.app";
+
+
 
 
 const NetworkedTetris = () => {
@@ -46,9 +45,8 @@ const NetworkedTetris = () => {
         }
 
         const socket = io(SOCKET_URL, {
-            reconnection: true,
-            reconnectionAttempts: 5,
-            reconnectionDelay: 1000,
+            withCredentials: true,
+            transports: ['websocket', 'polling'],
             auth: {
                 token: localStorage.getItem("token")
             }
