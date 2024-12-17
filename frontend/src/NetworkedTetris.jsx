@@ -9,9 +9,6 @@ import { useTranslation } from "react-i18next";
 const API_URL = "https://backend2-hazel.vercel.app";
 const SOCKET_URL = "https://backend2-hazel.vercel.app";
 
-
-
-
 const NetworkedTetris = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -45,8 +42,9 @@ const NetworkedTetris = () => {
         }
 
         const socket = io(SOCKET_URL, {
-            withCredentials: true,
-            transports: ['websocket', 'polling'],
+            reconnection: true,
+            reconnectionAttempts: 5,
+            reconnectionDelay: 1000,
             auth: {
                 token: localStorage.getItem("token")
             }

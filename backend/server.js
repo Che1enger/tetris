@@ -23,16 +23,6 @@ const io = new Server(server, {
     }
 });
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://frontend-iota-orpin.vercel.app");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    res.header("Access-Control-Allow-Credentials", "true");
-    if (req.method === "OPTIONS") {
-        return res.sendStatus(204);
-    }
-    next();
-});
 
 
 // Разрешить доступ только для определенного фронтенда
@@ -265,10 +255,6 @@ app.get('/api/leaderboard/network', authenticateToken, async (req, res) => {
 
 // Update user's network wins
 app.post('/api/network/win', authenticateToken, async (req, res) => {
-    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app'); // Указываем разрешённый домен
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true');
     try {
         console.log('Received network win request for user ID:', req.user.userId);
         
@@ -582,10 +568,6 @@ io.on('connection', (socket) => {
 
     // Отключение игрока
     socket.on('disconnect', () => {
-        res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app'); // Указываем разрешённый домен
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true'); 
         console.log(`🔌 Игрок отключился: ${socket.id}`);
         
         // Находим и удаляем все игры этого игрока
