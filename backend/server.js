@@ -403,6 +403,10 @@ const gameStates = new Map();
 
 // WebSocket: обработка обновления состояния игры
 io.on('connection', (socket) => {
+    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app'); // Указываем разрешённый домен
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true'); 
     console.log(`🔗 Игрок подключен: ${socket.id}`);
 
     socket.on('find-opponent', (data) => {
@@ -432,6 +436,10 @@ io.on('connection', (socket) => {
     });
 
     socket.on('opponent-game-state', (data) => {
+        res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app'); // Указываем разрешённый домен
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true'); 
         console.log('📥 Данные от клиента:', data);
     
         const game = players.get(data.gameId);
@@ -453,6 +461,10 @@ io.on('connection', (socket) => {
 
     // Обработка окончания игры
     socket.on('game-over', async ({ username, gameId, score }) => {
+        res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app'); // Указываем разрешённый домен
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true'); 
         try {
             console.log(`🎮 Игрок ${username} закончил игру ${gameId} со счетом ${score}`);
             
@@ -556,6 +568,10 @@ io.on('connection', (socket) => {
 
     // Отключение игрока
     socket.on('disconnect', () => {
+        res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app'); // Указываем разрешённый домен
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true'); 
         console.log(`🔌 Игрок отключился: ${socket.id}`);
         
         // Находим и удаляем все игры этого игрока
