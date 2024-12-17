@@ -16,7 +16,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: ['https://frontend-iota-orpin.vercel.app', 'https://backend2-hazel.vercel.app'], 
+        origin: 'https://frontend-iota-orpin.vercel.app', 
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true
@@ -31,13 +31,9 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.error('MongoDB connection error:', err));
-
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.error('MongoDB connection error:', err));
 // Authenticate token middleware
 const authenticateToken = async (req, res, next) => {
     const authHeader = req.header('Authorization');
@@ -102,8 +98,7 @@ app.post('/api/register', async (req, res) => {
 
 // Вход
 app.post('/api/login', async (req, res) => {
-    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app');
-    res.header('Access-Control-Allow-Credentials', 'true');
+
     try {
         const { username, password } = req.body;
         console.log('Login attempt:', { username });
@@ -175,7 +170,9 @@ app.get('/api/leaderboard/single', authenticateToken, async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-
+app.get('/test', (req, res) => {
+    res.send('Server is working!');
+});
 // Обновление максимального счета для одиночной игры
 app.post('/api/score/update', authenticateToken, async (req, res) => {
     try {
