@@ -284,22 +284,31 @@ app.post('/api/network/win', authenticateToken, async (req, res) => {
 
 // Get user profile
 app.get('/api/profile', authenticateToken, async (req, res) => {
-    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    
+    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app'); // Указываем разрешённый домен
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true'); //
     try {
         const user = await User.findById(req.user.userId);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
+        // Получаем количество сыгранных игр из коллекции Game
         const gamesPlayed = await Game.countDocuments({
-            $or: [{ player1: user._id }, { player2: user._id }]
+            $or: [
+                { player1: user._id },
+                { player2: user._id }
+            ]
         });
 
+        // Получаем количество игр из поля пользователя
         const userGamesPlayed = user.gamesPlayed || 0;
+
+        // Используем большее значение из двух источников
         const totalGamesPlayed = Math.max(gamesPlayed, userGamesPlayed);
 
+        // Обновляем поле gamesPlayed в модели пользователя, если оно отличается
         if (totalGamesPlayed !== userGamesPlayed) {
             user.gamesPlayed = totalGamesPlayed;
             await user.save();
@@ -319,20 +328,16 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
     }
 });
 
-
 // Update block color
 app.post('/api/profile/color', authenticateToken, async (req, res) => {
-    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    
     try {
         const { blockColor } = req.body;
         const user = await User.findById(req.user.userId);
-        if (!user) return res.status(404).json({ message: 'User not found' });
-
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
         user.blockColor = blockColor;
         await user.save();
-
         res.json({ message: 'Color updated successfully', blockColor });
     } catch (error) {
         console.error('Error updating block color:', error);
@@ -340,19 +345,15 @@ app.post('/api/profile/color', authenticateToken, async (req, res) => {
     }
 });
 
-
 // Increment games played
 app.post('/api/games/increment', authenticateToken, async (req, res) => {
-    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    
     try {
         const user = await User.findById(req.user.userId);
-        if (!user) return res.status(404).json({ message: 'User not found' });
-
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
         user.gamesPlayed += 1;
         await user.save();
-
         res.json({ message: 'Games played incremented', gamesPlayed: user.gamesPlayed });
     } catch (error) {
         console.error('Error incrementing games played:', error);
@@ -360,21 +361,22 @@ app.post('/api/games/increment', authenticateToken, async (req, res) => {
     }
 });
 
-
 // Get match history
 app.get('/api/matches/history', authenticateToken, async (req, res) => {
-    res.header('Access-Control-Allow-Origin', 'https://frontend-iota-orpin.vercel.app');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    
     try {
+        // Находим все игры, где пользователь был player1 или player2
         const games = await Game.find({
-            $or: [{ player1: req.user.userId }, { player2: req.user.userId }]
+            $or: [
+                { player1: req.user.userId },
+                { player2: req.user.userId }
+            ]
         })
-        .sort({ date: -1 })
-        .limit(10)
+        .sort({ date: -1 }) // Сортировка по дате (сначала новые)
+        .limit(10) // Ограничиваем 10 последними играми
         .populate('player1', 'username')
         .populate('player2', 'username');
 
+        // Форматируем результаты для фронтенда
         const matches = games.map(game => {
             const isPlayer1 = game.player1._id.toString() === req.user.userId;
             const opponent = isPlayer1 ? game.player2 : game.player1;
@@ -392,7 +394,6 @@ app.get('/api/matches/history', authenticateToken, async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-
 
 // WebSocket: обработка поиска противников и начала игры
 let waitingPlayer = null;
